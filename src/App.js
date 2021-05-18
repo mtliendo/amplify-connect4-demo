@@ -1,42 +1,58 @@
-import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from '@chakra-ui/react';
-import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import React from 'react'
+import { ChakraProvider, Container, Flex } from '@chakra-ui/react'
+import { useEffect, useReducer } from 'react'
+import NavBar from './components/NavBar'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import HomePage from './HomePage'
+import LobbyPage from './LobbyPage'
+import ProtectedRoute from './components/ProtectedRoute'
+import Connect4Page from './Connect4Page'
+import Amplify from 'aws-amplify'
+import { onAuthUIStateChange } from '@aws-amplify/ui-components'
+import config from './aws-exports'
 
-function App() {
-  return (
-    <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Logo h="40vmin" pointerEvents="none" />
-            <Text>
-              Edit <Code fontSize="xl">src/App.js</Code> and save to reload.
-            </Text>
-            <Link
-              color="teal.500"
-              href="https://chakra-ui.com"
-              fontSize="2xl"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn Chakra
-            </Link>
-          </VStack>
-        </Grid>
-      </Box>
-    </ChakraProvider>
-  );
+Amplify.configure(config)
+
+const authReducer = (state, action) => {
+  switch (action.type) {
+    case 'authStateChange':
+      return { authStage: action.authStage, user: action.user }
+    default:
+      throw Error(`action ${action.type} not found.`)
+  }
 }
 
-export default App;
+function App() {
+  const [authState, dispatch] = useReducer(authReducer, {})
+
+  useEffect(() => {
+    onAuthUIStateChange((nextAuthState, data) => {
+      dispatch({
+        type: 'authStateChange',
+        authStage: nextAuthState, //signin, signup, signout etc
+        user: data,
+      })
+    })
+  }, [])
+
+  return (
+    <ChakraProvider>
+      <Router>
+        <NavBar authState={authState} />
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route path="/lobby">
+            <ProtectedRoute component={LobbyPage} authState={authState} />
+          </Route>
+          <Route path="/game/connect4/:gameId">
+            <ProtectedRoute component={Connect4Page} authState={authState} />
+          </Route>
+        </Switch>
+      </Router>
+    </ChakraProvider>
+  )
+}
+
+export default App

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "storage": {
+      "Player:@model(appsync)": [
+        "create"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
