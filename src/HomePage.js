@@ -30,7 +30,7 @@ const HomePage = () => {
           </Text>
         </Heading>
         <Text color={'gray.500'} maxW={'3xl'}>
-          Play with friend next to you simply by clicking below. You can also
+          Play with friends next to you simply by clicking below. You can also
           sign up to play with other online players. It's never been easier to
           play this classic game!
         </Text>
