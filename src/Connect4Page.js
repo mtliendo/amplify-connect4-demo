@@ -4,6 +4,7 @@ import { onGameUpdatedByID } from './graphql/subscriptions'
 import { Connect4 } from './components/Connect4GameAmplify'
 import { updateGame } from './graphql/mutations'
 import { useLocation } from 'react-router-dom'
+import { Center } from '@chakra-ui/layout'
 
 function Connect4Page({ authUser }) {
   const location = useLocation()
@@ -40,13 +41,13 @@ function Connect4Page({ authUser }) {
   }
 
   return (
-    <div>
+    <Center h="90vh">
       <Connect4
         gameDetails={currentGame}
         authPlayer={authUser.username}
         onBoardUpdate={handleBoardUpdate}
       />
-    </div>
+    </Center>
   )
 }
 

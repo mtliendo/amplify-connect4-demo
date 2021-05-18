@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChakraProvider, Container, Flex } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
 import { useEffect, useReducer } from 'react'
 import NavBar from './components/NavBar'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
