@@ -1,6 +1,7 @@
 import API from '@aws-amplify/api'
 import { Avatar, AvatarGroup } from '@chakra-ui/avatar'
 import { Button } from '@chakra-ui/button'
+import { Container } from '@chakra-ui/layout'
 import { Flex, HStack, Text } from '@chakra-ui/layout'
 import { useHistory } from 'react-router-dom'
 import { updateGame } from '../graphql/mutations'
@@ -23,7 +24,7 @@ const UserTable = ({ gameList, handleGameUpdate }) => {
   }
 
   return (
-    <Flex w="40vw" minW="400px" direction="column">
+    <Flex w="40vw" minW="425px" direction="column">
       {gameList.map(game => {
         return (
           <Flex
@@ -42,28 +43,30 @@ const UserTable = ({ gameList, handleGameUpdate }) => {
               <Text>vs</Text>
               <Button variant="link">{game.player2}</Button>
             </HStack>
-            <Button
-              size="lg"
-              colorScheme="teal"
-              variant="link"
-              p="2"
-              type="submit"
-              onClick={e => {
-                e.preventDefault()
-                handleGameConnection(game)
-              }}
-            >
-              {game.gameStatus === 'LOBBY_IN_PROGRESS' ? 'resume' : 'connect'}
-            </Button>
-            <Button
-              size="lg"
-              colorScheme="red"
-              variant="link"
-              p="2"
-              onClick={() => removeGame(game.id)}
-            >
-              delete
-            </Button>
+            <Flex wrap="wrap">
+              <Button
+                size="lg"
+                colorScheme="teal"
+                variant="link"
+                p="2"
+                type="submit"
+                onClick={e => {
+                  e.preventDefault()
+                  handleGameConnection(game)
+                }}
+              >
+                {game.gameStatus === 'LOBBY_IN_PROGRESS' ? 'resume' : 'connect'}
+              </Button>
+              <Button
+                size="lg"
+                colorScheme="red"
+                variant="link"
+                p="2"
+                onClick={() => removeGame(game.id)}
+              >
+                x
+              </Button>
+            </Flex>
           </Flex>
         )
       })}
