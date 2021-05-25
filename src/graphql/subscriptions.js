@@ -13,6 +13,10 @@ export const onGameCreatedForSelf = /* GraphQL */ `
       currentPlayer
       board
       gameStatus
+      messages {
+        sender
+        message
+      }
       createdAt
       updatedAt
     }
@@ -30,6 +34,10 @@ export const onGameUpdatedByID = /* GraphQL */ `
       currentPlayer
       board
       gameStatus
+      messages {
+        sender
+        message
+      }
       createdAt
       updatedAt
     }
@@ -47,6 +55,10 @@ export const onCreateGame = /* GraphQL */ `
       currentPlayer
       board
       gameStatus
+      messages {
+        sender
+        message
+      }
       createdAt
       updatedAt
     }
@@ -64,6 +76,10 @@ export const onUpdateGame = /* GraphQL */ `
       currentPlayer
       board
       gameStatus
+      messages {
+        sender
+        message
+      }
       createdAt
       updatedAt
     }
@@ -81,6 +97,10 @@ export const onDeleteGame = /* GraphQL */ `
       currentPlayer
       board
       gameStatus
+      messages {
+        sender
+        message
+      }
       createdAt
       updatedAt
     }

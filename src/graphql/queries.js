@@ -46,6 +46,10 @@ export const getGame = /* GraphQL */ `
       currentPlayer
       board
       gameStatus
+      messages {
+        sender
+        message
+      }
       createdAt
       updatedAt
     }
@@ -68,6 +72,10 @@ export const listGames = /* GraphQL */ `
         currentPlayer
         board
         gameStatus
+        messages {
+          sender
+          message
+        }
         createdAt
         updatedAt
       }
@@ -130,6 +138,10 @@ export const gamesBySentToPlayer = /* GraphQL */ `
         currentPlayer
         board
         gameStatus
+        messages {
+          sender
+          message
+        }
         createdAt
         updatedAt
       }
@@ -164,6 +176,10 @@ export const gamesCreatedBySelf = /* GraphQL */ `
         currentPlayer
         board
         gameStatus
+        messages {
+          sender
+          message
+        }
         createdAt
         updatedAt
       }

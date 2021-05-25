@@ -18,7 +18,7 @@
       "function": {
         "c4talk3b7b1fdb": {
           "deploymentBucketName": "amplify-c4talk-dev-230018-deployment",
-          "s3Key": "amplify-builds/c4talk3b7b1fdb-52424d577a2f58486a66-build.zip"
+          "s3Key": "amplify-builds/c4talk3b7b1fdb-4d427550716363667034-build.zip"
         }
       }
     }

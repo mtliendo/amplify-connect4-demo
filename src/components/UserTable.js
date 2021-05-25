@@ -5,7 +5,7 @@ import { Flex, HStack, Text } from '@chakra-ui/layout'
 import { useHistory } from 'react-router-dom'
 import { updateGame } from '../graphql/mutations'
 
-const UserTable = ({ gameList }) => {
+const UserTable = ({ gameList, handleGameUpdate }) => {
   const history = useHistory()
 
   const handleGameConnection = async game => {
@@ -16,6 +16,10 @@ const UserTable = ({ gameList }) => {
 
     const updatedGame = data.updateGame
     history.push(`/game/connect4/${game.id}`, { currentGame: updatedGame })
+  }
+
+  const removeGame = gameId => {
+    handleGameUpdate(gameId)
   }
 
   return (
@@ -50,6 +54,15 @@ const UserTable = ({ gameList }) => {
               }}
             >
               {game.gameStatus === 'LOBBY_IN_PROGRESS' ? 'resume' : 'connect'}
+            </Button>
+            <Button
+              size="lg"
+              colorScheme="red"
+              variant="link"
+              p="2"
+              onClick={() => removeGame(game.id)}
+            >
+              delete
             </Button>
           </Flex>
         )

@@ -31,7 +31,9 @@ export default function NavBar({ authState }) {
             </HStack>
           </Flex>
           {authState.authStage === AuthState.SignedIn && authState.user && (
-            <AmplifySignOut />
+            <AmplifySignOut
+              buttonText={`SIGN OUT OF ${authState.user.username}`}
+            />
           )}
           <Flex justifyContent="flex-end">
             <ColorModeSwitcher />

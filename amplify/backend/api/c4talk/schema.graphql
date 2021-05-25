@@ -45,6 +45,12 @@ type Game
   currentPlayer: String!
   board: AWSJSON!
   gameStatus: GAME_STATUS!
+  messages: [Message]
+}
+
+type Message {
+  sender: String
+  message: String
 }
 
 enum GAME_STATUS {

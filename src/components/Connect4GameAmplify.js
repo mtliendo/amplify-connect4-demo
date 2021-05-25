@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Row } from './Row'
-import { Heading, VStack } from '@chakra-ui/react'
+import { Heading, HStack, Stack, VStack } from '@chakra-ui/react'
 import { checkForWin } from '../gameUtils'
 import { debounce } from 'debounce'
 import { Link } from 'react-router-dom'
@@ -69,31 +69,34 @@ export const Connect4 = ({
   )
 
   return (
-    <VStack>
-      <table>
-        <tbody>
-          {board.map((row, i) => (
-            <Row
-              key={i}
-              row={row}
-              play={debouncedPlay}
-              player1={gameDetails.player1}
-              player2={gameDetails.player2}
-            />
-          ))}
-        </tbody>
-      </table>
+    <Stack>
+      <VStack>
+        <table>
+          <tbody>
+            {board.map((row, i) => (
+              <Row
+                key={i}
+                row={row}
+                play={debouncedPlay}
+                player1={gameDetails.player1}
+                player2={gameDetails.player2}
+              />
+            ))}
+          </tbody>
+        </table>
 
-      {gameMessage ? (
-        <>
-          <Heading size="lg">{gameMessage}</Heading>
-          <Link style={{ textDecoration: 'underline' }} to="/lobby">
-            return to lobby
-          </Link>
-        </>
-      ) : (
-        <Heading>player turn: {gameDetails.currentPlayer}</Heading>
-      )}
-    </VStack>
+        {gameMessage ? (
+          <>
+            <Heading size="lg">{gameMessage}</Heading>
+            <Link style={{ textDecoration: 'underline' }} to="/lobby">
+              return to lobby
+            </Link>
+          </>
+        ) : (
+          <Heading>player turn: {gameDetails.currentPlayer}</Heading>
+        )}
+      </VStack>
+      {/* <p style={{ border: '1px solid yello/w', height: '50vh' }}>Hello</p> */}
+    </Stack>
   )
 }

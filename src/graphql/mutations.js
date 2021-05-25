@@ -64,6 +64,10 @@ export const createGame = /* GraphQL */ `
       currentPlayer
       board
       gameStatus
+      messages {
+        sender
+        message
+      }
       createdAt
       updatedAt
     }
@@ -84,6 +88,10 @@ export const updateGame = /* GraphQL */ `
       currentPlayer
       board
       gameStatus
+      messages {
+        sender
+        message
+      }
       createdAt
       updatedAt
     }
@@ -104,6 +112,10 @@ export const deleteGame = /* GraphQL */ `
       currentPlayer
       board
       gameStatus
+      messages {
+        sender
+        message
+      }
       createdAt
       updatedAt
     }

@@ -1,6 +1,6 @@
 .gameCell {
-  height: 8vw;
-  width: 8vw;
+  height: 7vw;
+  width: 7vw;
   background-color: #1990ff;
   cursor: pointer;
 }
@@ -8,8 +8,8 @@
 .whiteCircle,
 .redCircle,
 .yellowCircle {
-  height: 7.5vw;
-  width: 7.5vw;
+  height: 6.5vw;
+  width: 6.5vw;
   border-radius: 100px;
 }
 

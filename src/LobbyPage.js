@@ -10,7 +10,7 @@ import {
 } from './graphql/queries'
 import PlayerModal from './components/PlayerModal'
 import { onGameCreatedForSelf } from './graphql/subscriptions'
-import { createGame } from './graphql/mutations'
+import { createGame, updateGame } from './graphql/mutations'
 import { generateNewBoard } from './gameUtils'
 
 function LobbyPage({ authUser }) {
@@ -84,8 +84,14 @@ function LobbyPage({ authUser }) {
       })
 
       const foundPlayer = data.playersByUsername.items[0]
-      setFoundUser(foundPlayer)
-      setIsModalOpen(true)
+      if (foundPlayer) {
+        setFoundUser(foundPlayer)
+        setIsModalOpen(true)
+      } else {
+        console.log('player not found')
+      }
+    } else {
+      console.log('you cant search for yourself')
     }
   }
 
@@ -109,6 +115,24 @@ function LobbyPage({ authUser }) {
     setGameList(prevState => {
       return [data.createGame, ...prevState]
     })
+  }
+
+  const handleGameUpdate = async gameId => {
+    console.log(gameId)
+    const { data } = await API.graphql({
+      query: updateGame,
+      variables: {
+        input: {
+          id: gameId,
+          gameStatus: 'ENDED',
+        },
+      },
+    })
+
+    const updatedGameList = gameList.filter(
+      game => game.id !== data.updateGame.id
+    )
+    setGameList(updatedGameList)
   }
 
   return (
@@ -138,7 +162,7 @@ function LobbyPage({ authUser }) {
             />
           </VStack>
         </form>
-        <UserTable gameList={gameList} />
+        <UserTable gameList={gameList} handleGameUpdate={handleGameUpdate} />
       </Stack>
     </Container>
   )
